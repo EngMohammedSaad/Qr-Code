@@ -4,11 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Eto QrCode: make a styled QR code for any link, text, Wi-Fi, WhatsApp, contact or file link. Download PNG, SVG, JPG or WebP.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eto QrCode">
+<meta property="og:description" content="اعمل كود QR بشكلك أو امسح أي كود بالكاميرا أو من صورة. مجاني وعلى جهازك.">
+<meta property="og:image" content="https://github.com/EngMohammedSaad/Qr-Code/blob/main/icon.png?raw=true">
+<meta property="og:url" content="https://engmohammedsaad.github.io/Qr-Code/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/EngMohammedSaad/Qr-Code/blob/main/icon.png?raw=true">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>Eto QrCode</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: two-column workbench. Controls (content, design) in one column, a sticky "print sheet" with crop marks and export controls in the other. */
 :root{
   --bg:#E8ECF2; --surface:#FFFFFF; --surface2:#F1F4F8; --ink:#101B2E; --ink2:#566480; --line:#D1D8E3;
   --accent:#D6195E; --accent-ink:#FFFFFF; --good:#14794A; --warn:#8F5000; --bad:#B3261E; --focus:#1F5FD6;
@@ -46,12 +52,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tbtn{height:36px;min-width:36px;padding-inline:12px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .tbtn:hover{border-color:var(--ink2)}
 .tbtn svg{width:16px;height:16px}
-
 .grp{display:flex;flex-direction:column;gap:10px;padding-block:16px;border-top:1px solid var(--line)}
 .grp:first-of-type{border-top:0;padding-block-start:0}
 .grp>h3{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
 html[lang="ar"] .grp>h3{letter-spacing:0;font-size:13px;text-transform:none}
-
 .types{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
 .chip,.opt,.seg button{border:1px solid var(--line);background:var(--surface2);border-radius:8px;cursor:pointer;color:var(--ink);transition:background .12s,border-color .12s}
 .chip{padding:9px 10px;font-weight:600;font-size:14px;text-align:center}
@@ -71,7 +75,6 @@ html[dir="rtl"] input.ltr,html[dir="rtl"] textarea.ltr{text-align:left}
 input:focus,select:focus,textarea:focus{border-color:var(--focus)}
 .chk{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
 .chk input{width:18px;height:18px;accent-color:var(--accent)}
-
 .presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px}
 .preset{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px;border:1px solid var(--line);background:var(--surface2);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600}
 .preset:hover{border-color:var(--ink2)}
@@ -99,7 +102,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--focus)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .btn.pri:hover{filter:brightness(1.06)}
-
 .stage{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);min-width:0}
 .sheet{position:relative;background:var(--sheet);border-radius:6px;padding:26px;display:grid;place-items:center;aspect-ratio:1/1.0;overflow:hidden}
 .sheet .cm{position:absolute;width:12px;height:12px;border:0 solid var(--ink2);opacity:.7}
@@ -123,7 +125,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--focus)}
 .exp .seg{flex-wrap:nowrap;gap:6px}
 .exp .seg button{flex:1;padding:7px 4px;font-family:var(--mono);font-size:12px}
 .toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin-inline:auto;width:fit-content;max-width:min(92vw,420px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;font-weight:500;z-index:30;box-shadow:var(--shadow)}
-
 @media (max-width:880px){
   .bench{grid-template-columns:minmax(0,1fr)}
   .stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;order:-1;display:grid;grid-template-columns:136px minmax(0,1fr);gap:6px 12px;padding:10px;align-items:start;border-radius:10px}
@@ -141,8 +142,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--focus)}
   .fields{grid-template-columns:1fr}
   .brand h1{font-size:22px}
 }
-
-/* Workbench: tab rail on the physical left, the edit pane in the middle, the live print sheet on the right. */
 .bench{display:grid;grid-template-columns:184px minmax(0,1fr) minmax(300px,380px);gap:20px;align-items:start;direction:ltr}
 #app[dir="rtl"] .bench>*{direction:rtl}
 #app[dir="ltr"] .bench>*{direction:ltr}
@@ -164,7 +163,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--focus)}
 .flag{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:700}
 .flag svg{width:14px;height:14px}
 .tabpane[hidden]{display:none}
-
 .help{max-width:820px;margin-inline:auto;display:flex;flex-direction:column;gap:22px}
 .help .back{align-self:flex-start}
 .hhead{display:flex;flex-direction:column;gap:6px}
@@ -202,8 +200,6 @@ details.q .a p{margin:0 0 6px}
   .pane{min-height:0;padding:16px;order:1}
   .phead h2{font-size:19px}
 }
-
-/* ---- views: home, scan, text page ---- */
 #app[data-view="home"] .tag{display:none}
 #app[data-view="view"][data-from="link"] .top{display:none}
 .home{max-width:960px;margin-inline:auto;display:flex;flex-direction:column;gap:28px}
@@ -276,8 +272,6 @@ details.q .a p{margin:0 0 6px}
 .tacts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 @media (max-width:640px){.choices{grid-template-columns:1fr}.choice{padding:20px}.rrow{flex-wrap:wrap}.rrow .rl{width:100%}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-
-
 </style>
 </head>
 <body>
@@ -295,7 +289,6 @@ details.q .a p{margin:0 0 6px}
       <button class="tbtn" id="themeBtn" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
     </div>
   </header>
-
   <section id="homeView" class="home" hidden>
     <div class="hero">
       <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path fill-rule="evenodd" d="M2 2h14v14H2zM5 5v8h8V5z"/><path fill-rule="evenodd" d="M24 2h14v14H24zM27 5v8h8V5z"/><path fill-rule="evenodd" d="M2 24h14v14H2zM5 27v8h8v-8z"/><rect x="8" y="8" width="2" height="2" rx=".4" fill="var(--accent)"/><rect x="30" y="8" width="2" height="2" rx=".4"/><rect x="8" y="30" width="2" height="2" rx=".4"/><rect x="24" y="24" width="4" height="4" rx="1"/><rect x="31" y="24" width="3" height="3" rx="1"/><rect x="35" y="28" width="3" height="3" rx="1"/><rect x="24" y="31" width="3" height="3" rx="1"/><rect x="29" y="31" width="4" height="4" rx="1" fill="var(--accent)"/><rect x="35" y="35" width="3" height="3" rx="1"/></g></svg>
@@ -323,11 +316,9 @@ details.q .a p{margin:0 0 6px}
       <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg><span data-t="perk4"></span></div>
     </div>
   </section>
-
   <div id="toolView" hidden>
     <main class="bench">
       <nav class="rail" id="rail" role="tablist" aria-orientation="vertical"></nav>
-
       <section class="pane" id="pane">
         <div class="phead">
           <span class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.1 2.1 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><span id="flagTxt"></span></span>
@@ -343,7 +334,6 @@ details.q .a p{margin:0 0 6px}
         <div class="tabpane" id="tab-logo" role="tabpanel" hidden></div>
         <div class="tabpane" id="tab-adv" role="tabpanel" hidden></div>
       </section>
-
       <aside class="stage" id="stage">
         <div class="sheet" id="sheet"><i class="cm tl"></i><i class="cm tr"></i><i class="cm bl"></i><i class="cm br"></i><div class="qrbox" id="qrbox"></div></div>
         <div class="meta" id="meta"></div>
@@ -358,7 +348,6 @@ details.q .a p{margin:0 0 6px}
       </aside>
     </main>
   </div>
-
   <section id="scanView" hidden>
     <div class="scanwrap">
       <div class="pagehead"><h2 data-t="scanTitle"></h2><p data-t="scanSub"></p></div>
@@ -383,7 +372,6 @@ details.q .a p{margin:0 0 6px}
       <div id="result" aria-live="polite"></div>
     </div>
   </section>
-
   <section id="textView" hidden>
     <div class="tview">
       <div class="tpaper"><p class="ttext" id="ttext" dir="auto"></p></div>
@@ -394,21 +382,18 @@ details.q .a p{margin:0 0 6px}
       </div>
     </div>
   </section>
-
   <section id="helpView" hidden>
     <div class="help">
       <button class="btn back" id="helpBack" type="button"></button>
       <div id="helpBody"></div>
     </div>
   </section>
-
   <footer class="foot">
     <p id="privacy"></p>
     <p class="copy"><span id="copyTxt"></span><span class="dot" aria-hidden="true">·</span><b class="dev">Dev By ETO</b></p>
   </footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
 <script>
 const QRCore = (function () {
   'use strict';
@@ -425,7 +410,6 @@ const QRCore = (function () {
     Q: [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20, 23, 23, 25, 27, 29, 34, 34, 35, 38, 40, 43, 45, 48, 51, 53, 56, 59, 62, 65, 68],
     H: [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25, 25, 34, 30, 32, 35, 37, 40, 42, 45, 48, 51, 54, 57, 60, 63, 66, 70, 74, 77, 81]
   };
-
   function numRawDataModules(ver) {
     var r = (16 * ver + 128) * ver + 64;
     if (ver >= 2) {
@@ -438,8 +422,6 @@ const QRCore = (function () {
   function numDataCodewords(ver, ecl) {
     return Math.floor(numRawDataModules(ver) / 8) - ECC_CW[ecl][ver] * NUM_BLOCKS[ecl][ver];
   }
-
-  /* Reed-Solomon over GF(256) / 0x11D */
   function gfMul(x, y) {
     var z = 0;
     for (var i = 7; i >= 0; i--) {
@@ -471,7 +453,6 @@ const QRCore = (function () {
     });
     return result;
   }
-
   function alignPositions(ver) {
     if (ver === 1) return [];
     var n = Math.floor(ver / 7) + 2;
@@ -525,7 +506,6 @@ const QRCore = (function () {
     result += k2 * 10;
     return result;
   }
-
   function encode(text, ecl, minVersion, forceMask) {
     ecl = ecl || 'M';
     var data = Array.prototype.slice.call(new TextEncoder().encode(text));
@@ -535,7 +515,6 @@ const QRCore = (function () {
       if (4 + ccBits + data.length * 8 <= numDataCodewords(ver, ecl) * 8) break;
     }
     if (ver > 40) { var err = new Error('too_long'); err.code = 'too_long'; throw err; }
-
     var bb = [];
     function push(val, len) { for (var i = len - 1; i >= 0; i--) bb.push((val >>> i) & 1); }
     push(4, 4);
@@ -551,8 +530,6 @@ const QRCore = (function () {
       for (var q = 0; q < 8; q++) v = (v << 1) | bb[i + q];
       dataBytes.push(v);
     }
-
-    /* ECC + interleave */
     var numBlocks = NUM_BLOCKS[ecl][ver], blockEccLen = ECC_CW[ecl][ver];
     var rawCw = Math.floor(numRawDataModules(ver) / 8);
     var numShort = numBlocks - rawCw % numBlocks;
@@ -571,13 +548,10 @@ const QRCore = (function () {
         if (x !== shortLen - blockEccLen || j >= numShort) all.push(block[x]);
       });
     }
-
-    /* matrix */
     var size = ver * 4 + 17;
     var mod = [], fn = [];
     for (var r = 0; r < size; r++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
     function setFn(px, py, dark) { mod[py][px] = dark; fn[py][px] = true; }
-
     for (var t = 0; t < size; t++) { setFn(6, t, t % 2 === 0); setFn(t, 6, t % 2 === 0); }
     function finder(cx, cy) {
       for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) {
@@ -619,7 +593,6 @@ const QRCore = (function () {
         setFn(a, bq, vcol); setFn(bq, a, vcol);
       }
     }
-    /* codewords, zigzag */
     var idx = 0;
     for (var right = size - 1; right >= 1; right -= 2) {
       if (right === 6) right = 5;
@@ -665,8 +638,6 @@ const QRCore = (function () {
   function maxBytes(ecl) { return Math.floor((numDataCodewords(40, ecl) * 8 - 4 - 16) / 8); }
   return { encode: encode, maxBytes: maxBytes, _tables: { ECC_CW: ECC_CW, NUM_BLOCKS: NUM_BLOCKS } };
 })();
-
-
 (function(){
 'use strict';
 var $=function(s,r){return (r||document).querySelector(s)};
@@ -735,7 +706,7 @@ var S={
  logoWarn:{ar:'مع الشعار الأفضل تصحيح أخطاء Q أو H.',en:'With a logo, error correction Q or H is safer.'},
  saved:{ar:'اتحفظ {f}',en:'Saved {f}'},copied:{ar:'اتنسخ كود SVG',en:'SVG code copied'},copyFail:{ar:'المتصفح منع النسخ. حدد الكود وانسخه بإيدك.',en:'The browser blocked copying.'},saveFail:{ar:'ماقدرتش أحفظ الملف. جرّب تاني.',en:'Could not save the file. Try again.'},
  tip:{ar:'جرّب تمسح الكود بموبايلك قبل ما تطبعه، خصوصًا مع الأشكال الدائرية والشعار.',en:'Scan the code with your phone before printing, especially with round eyes or a logo.'},
- foot:{ar:'الكود بيتعمل جوّه متصفحك، ومفيش حاجة بتتبعت لأي سيرفر.',en:'Codes are generated inside your browser. Nothing is sent to any server.'},
+ foot:{ar:'صل ع النبي.',en:'Codes are generated inside your browser. Nothing is sent to any server.'},
  sample:{ar:'Eto QrCode',en:'Eto QrCode'}
 };
 Object.assign(S,{
@@ -784,31 +755,30 @@ Object.assign(S,{
  badLink:{ar:'الرابط ده مش سليم أو ناقص.',en:'This link is invalid or incomplete.'},
  f_page:{ar:'اعرض النص في صفحة حلوة لما حد يمسح الكود',en:'Show the text on a clean page when someone scans the code'},
  f_site2:{ar:'رابط موقعك (اختياري)',en:'Your site link (optional)'},
- pageLocalWarn:{ar:'الكود ده بيفتح الصفحة من عنوان الجهاز عندك. بعد ما تنشر الموقع على GitHub اعمل الكود تاني من الموقع المنشور، أو اكتب رابط موقعك في الخانة اللي فوق.',en:'This code points to the page on your local address. After publishing the site on GitHub, make the code again from the published site, or enter your site link in the field above.'},
+ pageLocalWarn:{ar:'.',en:''},
  hint_text:{ar:'أي نص حر. لما حد يمسحه بكاميرا موبايله هيتفتح له النص في نص صفحة مرتبة، من غير ما يحتاج أي تطبيق.',en:'Any plain text. When someone scans it with their phone camera, the text opens centered on a clean page. No app needed.'}
 });
-
 function t(k,vars){var s=(S[k]||{})[lang]||k;if(vars)Object.keys(vars).forEach(function(n){s=s.split('{'+n+'}').join(vars[n])});return s}
 function normUrl(v){v=(v||'').trim();if(!v)return '';return /^[a-z][a-z0-9+.\-]*:/i.test(v)?v:'https://'+v}
 function esc(s){return String(s).replace(/([\;,:"])/g,'\\$1')}
 function vc(s){return String(s||'').replace(/([,;\\])/g,'\\$1').replace(/\r?\n/g,'\\n')}
 function enc(s){return encodeURIComponent(s)}
 var TYPES={
- link:{fields:[{id:'url',l:'f_url',ltr:1,ex:'https://example.com/eto',wide:1}],build:function(v){return normUrl(v.url)}},
+ link:{fields:[{id:'url',l:'f_url',ltr:1,ex:'https://engmohammedsaad.github.io/Qr-Code/',wide:1}],build:function(v){return normUrl(v.url)}},
  text:{fields:[{id:'text',l:'f_text',kind:'textarea',ex:'أهلاً من Eto QrCode',wide:1},{id:'page',l:'f_page',kind:'checkbox',ex:true},{id:'site',l:'f_site2',ltr:1,ex:'',ph:'https://engmohammedsaad.github.io/Qr-Code/',wide:1,dep:'page'}],
   build:function(v){if(!v.text)return '';return v.page?viewerUrl(v.text):v.text}},
  wifi:{fields:[{id:'ssid',l:'f_ssid',ex:'Eto-WiFi'},{id:'pass',l:'f_pass',ltr:1,ex:'change-me-123'},{id:'enc',l:'f_enc',kind:'select',opts:[['WPA','WPA / WPA2 / WPA3'],['WEP','WEP'],['nopass','enc_nopass']],ex:'WPA'},{id:'hidden',l:'f_hidden',kind:'checkbox',ex:false}],
   build:function(v){if(!v.ssid)return '';return 'WIFI:T:'+v.enc+';S:'+esc(v.ssid)+';'+(v.enc!=='nopass'&&v.pass?'P:'+esc(v.pass)+';':'')+(v.hidden?'H:true;':'')+';'}},
  whatsapp:{fields:[{id:'phone',l:'f_wa',ltr:1,ex:'201001234567',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً! حابب أعرف أكتر.',wide:1}],
   build:function(v){var d=(v.phone||'').replace(/\D/g,'').replace(/^00/,'');if(!d)return '';return 'https://wa.me/'+d+(v.msg?'?text='+enc(v.msg):'')}},
- email:{fields:[{id:'to',l:'f_to',ltr:1,ex:'hello@example.com',wide:1},{id:'subject',l:'f_subject',ex:'استفسار',wide:1},{id:'body',l:'f_body',kind:'textarea',ex:'',wide:1}],
+email:{fields:[{id:'to',l:'f_to',ltr:1,ex:'hello@example.com',wide:1},{id:'subject',l:'f_subject',ex:'استفسار',wide:1},{id:'body',l:'f_body',kind:'textarea',ex:'',wide:1}],
   build:function(v){if(!(v.to||'').trim())return '';var p=[];if(v.subject)p.push('subject='+enc(v.subject));if(v.body)p.push('body='+enc(v.body));return 'mailto:'+v.to.trim()+(p.length?'?'+p.join('&'):'')}},
  phone:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567',wide:1}],build:function(v){var d=(v.phone||'').replace(/[\s()\-]/g,'');return d?'tel:'+d:''}},
  sms:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً!',wide:1}],
   build:function(v){var d=(v.phone||'').replace(/[\s()\-]/g,'');return d?'SMSTO:'+d+':'+(v.msg||''):''}},
  location:{fields:[{id:'lat',l:'f_lat',ltr:1,ex:'30.0444'},{id:'lng',l:'f_lng',ltr:1,ex:'31.2357'}],
   build:function(v){var a=parseFloat(v.lat),b=parseFloat(v.lng);if(!isFinite(a)||!isFinite(b)||Math.abs(a)>90||Math.abs(b)>180)return '';return 'geo:'+a+','+b}},
- contact:{fields:[{id:'first',l:'f_first',ex:'أحمد'},{id:'last',l:'f_last',ex:'علي'},{id:'org',l:'f_org',ex:''},{id:'title',l:'f_title',ex:''},{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567'},{id:'email',l:'f_email',ltr:1,ex:'ahmed@example.com'},{id:'site',l:'f_site',ltr:1,ex:'',wide:1},{id:'addr',l:'f_addr',ex:'',wide:1}],
+contact:{fields:[{id:'first',l:'f_first',ex:'أحمد'},{id:'last',l:'f_last',ex:'علي'},{id:'org',l:'f_org',ex:''},{id:'title',l:'f_title',ex:''},{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567'},{id:'email',l:'f_email',ltr:1,ex:'ahmed@example.com'},{id:'site',l:'f_site',ltr:1,ex:'',wide:1},{id:'addr',l:'f_addr',ex:'',wide:1}],
   build:function(v){if(!(v.first||v.last||v.phone||v.email))return '';var L=['BEGIN:VCARD','VERSION:3.0','N:'+vc(v.last)+';'+vc(v.first)+';;;','FN:'+vc((v.first||'')+' '+(v.last||'')).trim()];
     if(v.org)L.push('ORG:'+vc(v.org));if(v.title)L.push('TITLE:'+vc(v.title));if(v.phone)L.push('TEL;TYPE=CELL:'+v.phone.replace(/[\s()\-]/g,''));if(v.email)L.push('EMAIL:'+vc(v.email));if(v.site)L.push('URL:'+normUrl(v.site));if(v.addr)L.push('ADR;TYPE=WORK:;;'+vc(v.addr)+';;;;');L.push('END:VCARD');return L.join('\n')}},
  file:{fields:[{id:'url',l:'f_fileurl',ltr:1,ex:'https://example.com/menu.pdf',wide:1}],build:function(v){return normUrl(v.url)}}
@@ -816,14 +786,12 @@ var TYPES={
 var ORDER=['link','text','wifi','whatsapp','email','phone','sms','location','contact','file'];
 var values={},touched={};
 ORDER.forEach(function(k){values[k]={};TYPES[k].fields.forEach(function(fd){values[k][fd.id]=fd.ex})});
-
-/* ---------- design state ---------- */
 var DEF={dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#101b2e',fg2:'#d6195e',angle:45,bg:'#ffffff',transparent:false,bgRadius:0,eyeCustom:true,eyeFrameColor:'#d6195e',eyeBallColor:'#101b2e',margin:4,ecc:'M',logo:null,logoSize:20,logoBg:true,caption:false,captionText:''};
 var design=Object.assign({},DEF);
 var PRESETS=[
  {id:'classic',d:{dots:'square',frame:'square',ball:'square',fill:'solid',fg:'#000000',bg:'#ffffff',eyeCustom:false}},
  {id:'ink',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#101b2e',bg:'#ffffff',eyeCustom:true,eyeFrameColor:'#d6195e',eyeBallColor:'#101b2e'}},
- {id:'sunset',d:{dots:'rounded',frame:'rounded',ball:'circle',fill:'linear',fg:'#d6195e',fg2:'#f07a12',angle:45,bg:'#ffffff',eyeCustom:false}},
+{id:'sunset',d:{dots:'rounded',frame:'rounded',ball:'circle',fill:'linear',fg:'#d6195e',fg2:'#f07a12',angle:45,bg:'#ffffff',eyeCustom:false}},
  {id:'ocean',d:{dots:'dots',frame:'circle',ball:'circle',fill:'linear',fg:'#0b3c8c',fg2:'#0e9aa7',angle:90,bg:'#ffffff',eyeCustom:false}},
  {id:'forest',d:{dots:'smooth',frame:'leaf',ball:'leaf',fill:'solid',fg:'#14532d',bg:'#f4f8ee',eyeCustom:true,eyeFrameColor:'#14532d',eyeBallColor:'#4d7c0f'}},
  {id:'violet',d:{dots:'diamond',frame:'rounded',ball:'diamond',fill:'radial',fg:'#4c1d95',fg2:'#c026d3',bg:'#ffffff',eyeCustom:false}}
@@ -887,22 +855,17 @@ function buildSVG(qr,D,px,uid){
   if(cap){var rtl=/[؀-ۿ]/.test(cap);o+='<text x="'+f(W/2)+'" y="'+f(W+capH*.62)+'" text-anchor="middle" font-family="Tahoma, Arial, sans-serif" font-weight="700" font-size="'+f(W*.075)+'"'+(rtl?' direction="rtl"':'')+' fill="'+(D.fill==='solid'?D.fg:D.fg)+'">'+xml(cap)+'</text>'}
   return o+'</svg>';
 }
-
-/* ---------- icons ---------- */
 function dotIcon(style){var P=[[1,1,0,1],[0,1,1,1],[1,0,1,0],[1,1,0,1]];
   var d=modulePath(function(x,y){return !!(P[y]&&P[y][x])},function(){return false},4,0,style);
   return '<svg viewBox="0 0 4 4" aria-hidden="true"><path d="'+d+'" fill="currentColor"'+(style==='square'?' shape-rendering="crispEdges"':'')+'/></svg>'}
 function frameIcon(style){return '<svg viewBox="-.5 -.5 8 8" aria-hidden="true"><path fill-rule="evenodd" d="'+framePath(0,0,style)+'" fill="currentColor"/><path d="'+ballPath(0,0,'square')+'" fill="currentColor"/></svg>'}
 function ballIcon(style){return '<svg viewBox="1 1 5 5" aria-hidden="true"><path d="'+ballPath(0,0,style)+'" fill="currentColor"/></svg>'}
-
-/* ---------- state + controls ---------- */
 var state={type:'link',size:1024,current:null};
 var syncs=[];
 function reg(fn){syncs.push(fn);fn()}
 function syncAll(){syncs.forEach(function(fn){fn()})}
 var raf=0;
 function schedule(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;update()})}
-
 function seg(key,items,after){
   var box=h('div',{class:'seg',role:'group'});
   var btns=items.map(function(it){return h('button',{type:'button',onclick:function(){design[key]=it[0];syncAll();if(after)after();schedule()}},t(it[1]))});
@@ -930,7 +893,6 @@ function check(key,lk,after){
   return h('label',{class:'chk'},inp,h('span',{},t(lk)))}
 function when(el,fn){reg(function(){el.hidden=!fn()});return el}
 function grp(title){var g=h('div',{class:'grp'});if(title)g.append(h('h3',{},t(title)));for(var i=1;i<arguments.length;i++)g.append(arguments[i]);return g}
-
 function thumbSVG(p,qr){var d=Object.assign({},DEF,p.d,{margin:1,logo:null,caption:false,transparent:false});return buildSVG(qr,d,null,'pt'+p.id)}
 function buildDesign(){
   syncs.length=0;
@@ -939,10 +901,8 @@ function buildDesign(){
   var pre=h('div',{class:'presets'});
   PRESETS.forEach(function(p){pre.append(h('button',{type:'button',class:'preset',onclick:function(){Object.assign(design,p.d);syncAll();schedule()}},h('span',{class:'th',html:thumbSVG(p,tiny)}),h('span',{},t('p_'+p.id))))});
   $('#tab-style').append(
-    grp('presets',pre),
-    grp('dots',opts('dots',[['square','d_square'],['smooth','d_smooth'],['rounded','d_rounded'],['dots','d_dots'],['diamond','d_diamond']],dotIcon)),
-    grp('frame',opts('frame',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf']],frameIcon)),
-    grp('ball',opts('ball',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf'],['diamond','d_diamond']],ballIcon)));
+    grp('presets',pre),  grp('dots',opts('dots',[['square','d_square'],['smooth','d_smooth'],['rounded','d_rounded'],['dots','d_dots'],['diamond','d_diamond']],dotIcon)),
+grp('frame',opts('frame',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf']],frameIcon)), grp('ball',opts('ball',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf'],['diamond','d_diamond']],ballIcon)));
   var lin=when(h('div',{class:'sub'},colorRow('fg2','fg2'),when(slider('angle',0,360,5,'angle',function(v){return v+'°'}),function(){return design.fill==='linear'})),function(){return design.fill!=='solid'});
   var eyeSub=when(h('div',{class:'sub'},colorRow('eyeFrameColor','eyeFrameColor'),colorRow('eyeBallColor','eyeBallColor')),function(){return design.eyeCustom});
   $('#tab-colors').append(
@@ -972,8 +932,6 @@ function loadLogo(file){
     design.logo=c.toDataURL('image/png');if(design.ecc==='L'||design.ecc==='M')design.ecc='H';syncAll();schedule()};
     img.src=rd.result};
   rd.readAsDataURL(file)}
-
-/* ---------- content form ---------- */
 function buildTypes(){
   var box=$('#types');box.replaceChildren();
   ORDER.forEach(function(k){box.append(h('button',{type:'button',class:'chip','aria-pressed':String(state.type===k),onclick:function(){state.type=k;buildTypes();buildForm();schedule()}},t('t_'+k)))});
@@ -993,8 +951,6 @@ function buildForm(){
     el.addEventListener('change',function(){values[tp][fd.id]=el.value;schedule()});
     box.append(h('div',{class:'fld'+(fd.wide?' wide':''),'data-dep':fd.dep,hidden:!!(fd.dep&&!values[tp][fd.dep])},h('label',{for:id},h('span',{},t(fd.l))),el))});
   var en=$('#exNote');en.textContent=t('example');en.hidden=!!touched[tp]}
-
-/* ---------- preview ---------- */
 function lum(hex){var c=[1,3,5].map(function(i){return parseInt(hex.substr(i,2),16)/255}).map(function(v){return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
 function ratio(a,b){var A=lum(a),B=lum(b);return (Math.max(A,B)+.05)/(Math.min(A,B)+.05)}
 var RECOV={L:7,M:15,Q:25,H:30};
@@ -1026,8 +982,6 @@ function updateCore(){
   if(design.logo&&(design.ecc==='L'||design.ecc==='M')){msg+=' '+t('logoWarn');if(kind==='ok')kind='warn'}
   if(tp==='text'&&values.text.page&&isLocalBase()){msg+=' '+t('pageLocalWarn');kind='warn'}
   setStatus(kind,msg)}
-
-/* ---------- export ---------- */
 var toastT=0;
 function toast(msg){var el=$('#toast');el.textContent=msg;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){el.hidden=true},2600)}
 function rasterize(svg,w,hh,type,bg){return new Promise(function(res,rej){
@@ -1057,7 +1011,6 @@ function copySvg(){
   var cur=state.current;if(!cur)return;var svg=buildSVG(cur.qr,design,state.size,'ex');
   var p;try{p=navigator.clipboard.writeText(svg)}catch(e){p=Promise.reject(e)}
   p.then(function(){toast(t('copied'))},function(){toast(t('copyFail'))})}
-
 function buildExport(){
   var sz=$('#sizes');sz.replaceChildren();
   [512,1024,2048,4096].forEach(function(v){sz.append(h('button',{type:'button','aria-pressed':String(state.size===v),onclick:function(){state.size=v;buildExport()}},String(v)))});
@@ -1065,8 +1018,6 @@ function buildExport(){
   [['png','PNG'],['svg','SVG'],['jpg','JPG'],['webp','WebP']].forEach(function(p,i){dl.append(h('button',{type:'button',class:'btn'+(i===0?' pri':''),onclick:function(){exportAs(p[0])}},p[1]))});
   $('#szLabel').textContent=t('stSize');$('#copySvg').textContent=t('copySvg');
   dl.querySelectorAll('.btn').forEach(function(b){b.disabled=!state.current})}
-
-/* ---------- tabs, views, help ---------- */
 state.tab='content';state.view='home';state.fromLink=false;
 var ICONS={content:'<path d="M4 6h16M4 12h10M4 18h14"/>',style:'<rect x="3.5" y="3.5" width="8" height="8" rx="1.5"/><circle cx="17" cy="7.5" r="4"/><path d="M3.5 20.5l4-7 4 7z"/><rect x="14" y="14" width="6.5" height="6.5" rx="3.25"/>',colors:'<circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10.5" r="1.1" fill="currentColor"/><circle cx="12" cy="7.8" r="1.1" fill="currentColor"/><circle cx="15.6" cy="10.5" r="1.1" fill="currentColor"/><path d="M12 20.5c-1.6 0-1.6-2.3 0-3 1.2-.5 3.5.2 3.5-1.5"/>',logo:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/>',adv:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/>'};
 var TABS=['content','style','colors','logo','adv'];
