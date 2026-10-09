@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Eto QrCode: make a styled QR code for any link, text, Wi-Fi, WhatsApp, contact or file link. Download PNG, SVG, JPG or WebP.">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#101B2E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Eto QrCode">
 <meta property="og:description" content="اعمل كود QR بشكلك أو امسح أي كود بالكاميرا أو من صورة. مجاني وعلى جهازك.">
@@ -271,6 +275,19 @@ details.q .a p{margin:0 0 6px}
 .ttext.long{font-size:clamp(17px,3.3vw,22px);line-height:1.95;font-weight:500}
 .tacts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 @media (max-width:640px){.choices{grid-template-columns:1fr}.choice{padding:20px}.rrow{flex-wrap:wrap}.rrow .rl{width:100%}}
+.dl.x3{grid-template-columns:repeat(3,minmax(0,1fr))}.dl.x3 .btn{font-family:var(--body);font-size:12px}
+.presets+.btn{align-self:flex-start}
+.hist{display:flex;flex-direction:column;gap:6px}.hist h3{margin:0;font-size:13px;color:var(--ink2)}
+.hi{display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line);background:var(--surface);border-radius:10px;cursor:pointer;text-align:start;width:100%;color:var(--ink)}
+.hi b{flex:none;font-size:12px;color:var(--accent)}.hi span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:auto}
+.inst{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:16px 18px;border:1px dashed var(--accent);border-radius:14px;background:var(--surface)}
+.inst>div{flex:1 1 220px}.inst b{display:block;font-size:16px}.inst span{font-size:13px;color:var(--ink2)}
+.ovl{position:fixed;inset:0;z-index:40;background:rgba(8,12,22,.6);display:grid;place-items:center;padding:16px}
+.dlg{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.dlg h3{margin:0;font:800 20px var(--display)}.dlg p{margin:0;font-size:14px;color:var(--ink2);line-height:1.7}
+.pbar{height:12px;border-radius:99px;background:var(--surface2);border:1px solid var(--line);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.pnum{font:600 13px var(--mono);direction:ltr;text-align:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -650,6 +667,8 @@ function h(tag,a){var e=document.createElement(tag),k=[].slice.call(arguments,2)
   (function add(list){list.forEach(function(c){if(c==null||c===false)return;if(Array.isArray(c))return add(c);e.append(c.nodeType?c:document.createTextNode(c));});})(k);
   return e;}
 function f(n){return +n.toFixed(3)}
+
+/* ---------- i18n ---------- */
 var lang='ar';
 var S={
  tab_content:{ar:'المحتوى',en:'Content'},tab_style:{ar:'الأشكال',en:'Shapes'},tab_colors:{ar:'الألوان',en:'Colors'},tab_logo:{ar:'الشعار والنص',en:'Logo & text'},tab_adv:{ar:'متقدم',en:'Advanced'},tab_help:{ar:'مركز المساعدة',en:'Help Center'},
@@ -756,6 +775,19 @@ Object.assign(S,{
  pageLocalWarn:{ar:'.',en:''},
  hint_text:{ar:'أي نص حر. لما حد يمسحه بكاميرا موبايله هيتفتح له النص في نص صفحة مرتبة، من غير ما يحتاج أي تطبيق.',en:'Any plain text. When someone scans it with their phone camera, the text opens centered on a clean page. No app needed.'}
 });
+
+Object.assign(S,{
+ pageLocalWarn:{ar:'الكود ده مربوط بالعنوان اللي فاتح منه الموقع دلوقتي، فمش هيشتغل على جهاز تاني. افتح الموقع من رابطه الأساسي وبعدين اعمل الكود.',en:'This code points to the address you opened the site from, so it will not work on other devices. Open the main site link and make the code there.'},
+ showMore:{ar:'عرض المزيد',en:'Show more'},showLess:{ar:'عرض أقل',en:'Show less'},
+ p_navy:{ar:'كحلي',en:'Navy'},p_crimson:{ar:'عنابي',en:'Crimson'},p_emerald:{ar:'زمردي',en:'Emerald'},p_plum:{ar:'برقوقي',en:'Plum'},p_cocoa:{ar:'كاكاو',en:'Cocoa'},p_midnight:{ar:'منتصف الليل',en:'Midnight'},p_wine:{ar:'نبيتي',en:'Wine'},p_slate:{ar:'رمادي',en:'Slate'},p_mint:{ar:'نعناع',en:'Mint'},p_sand:{ar:'رملي',en:'Sand'},
+ copyImg:{ar:'انسخ الصورة',en:'Copy image'},shareImg:{ar:'مشاركة',en:'Share'},printQR:{ar:'طباعة',en:'Print'},
+ histTitle:{ar:'آخر اللي مسحته',en:'Recent scans'},histClear:{ar:'مسح السجل',en:'Clear history'},
+ instTitle:{ar:'نزّل التطبيق على جهازك',en:'Install the app on your device'},instSub:{ar:'بيفتح زي أي برنامج، وبيشتغل من غير نت، على الموبايل والكمبيوتر.',en:'Opens like any app and works offline, on phone and computer.'},instBtn:{ar:'نزّل التطبيق',en:'Install the app'},
+ instPrep:{ar:'بنجهّز الملفات على جهازك...',en:'Preparing files on your device...'},instAsk:{ar:'وافق على التثبيت من النافذة اللي ظهرت.',en:'Confirm the installation in the prompt that appeared.'},instDone:{ar:'تمام، التطبيق جاهز.',en:'Done, the app is ready.'},instDl:{ar:'بنحمّل الملف...',en:'Downloading the file...'},
+ instIOS:{ar:'على الآيفون والآيباد: اضغط زر المشاركة في سفاري، واختار "إضافة إلى الشاشة الرئيسية".',en:'On iPhone and iPad: tap the Share button in Safari, then choose "Add to Home Screen".'},
+ instManual:{ar:'من قائمة المتصفح (النقط التلاتة) اختار "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية". ولو مش ظاهرة، نزّل النسخة كملف تحت.',en:'From the browser menu (three dots) choose "Install app" or "Add to Home Screen". If it is not shown, download the file copy below.'},
+ instFile:{ar:'نزّل نسخة ملف تشتغل بدون نت',en:'Download an offline file copy'},instClose:{ar:'إغلاق',en:'Close'},installed:{ar:'اتثبّت التطبيق',en:'App installed'}
+});
 function t(k,vars){var s=(S[k]||{})[lang]||k;if(vars)Object.keys(vars).forEach(function(n){s=s.split('{'+n+'}').join(vars[n])});return s}
 function normUrl(v){v=(v||'').trim();if(!v)return '';return /^[a-z][a-z0-9+.\-]*:/i.test(v)?v:'https://'+v}
 function esc(s){return String(s).replace(/([\;,:"])/g,'\\$1')}
@@ -763,20 +795,20 @@ function vc(s){return String(s||'').replace(/([,;\\])/g,'\\$1').replace(/\r?\n/g
 function enc(s){return encodeURIComponent(s)}
 var TYPES={
  link:{fields:[{id:'url',l:'f_url',ltr:1,ex:'https://engmohammedsaad.github.io/Qr-Code/',wide:1}],build:function(v){return normUrl(v.url)}},
- text:{fields:[{id:'text',l:'f_text',kind:'textarea',ex:'أهلاً من Eto QrCode',wide:1},{id:'page',l:'f_page',kind:'checkbox',ex:true},{id:'site',l:'f_site2',ltr:1,ex:'',ph:'https://engmohammedsaad.github.io/Qr-Code/',wide:1,dep:'page'}],
+ text:{fields:[{id:'text',l:'f_text',kind:'textarea',ex:'أهلاً من Eto QrCode',wide:1},{id:'page',l:'f_page',kind:'checkbox',ex:true}],
   build:function(v){if(!v.text)return '';return v.page?viewerUrl(v.text):v.text}},
  wifi:{fields:[{id:'ssid',l:'f_ssid',ex:'Eto-WiFi'},{id:'pass',l:'f_pass',ltr:1,ex:'change-me-123'},{id:'enc',l:'f_enc',kind:'select',opts:[['WPA','WPA / WPA2 / WPA3'],['WEP','WEP'],['nopass','enc_nopass']],ex:'WPA'},{id:'hidden',l:'f_hidden',kind:'checkbox',ex:false}],
   build:function(v){if(!v.ssid)return '';return 'WIFI:T:'+v.enc+';S:'+esc(v.ssid)+';'+(v.enc!=='nopass'&&v.pass?'P:'+esc(v.pass)+';':'')+(v.hidden?'H:true;':'')+';'}},
- whatsapp:{fields:[{id:'phone',l:'f_wa',ltr:1,ex:'201001234567',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً! حابب أعرف أكتر.',wide:1}],
+ whatsapp:{fields:[{id:'phone',l:'f_wa',ltr:1,ex:'201096925903',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً! حابب أعرف أكتر.',wide:1}],
   build:function(v){var d=(v.phone||'').replace(/\D/g,'').replace(/^00/,'');if(!d)return '';return 'https://wa.me/'+d+(v.msg?'?text='+enc(v.msg):'')}},
 email:{fields:[{id:'to',l:'f_to',ltr:1,ex:'hello@example.com',wide:1},{id:'subject',l:'f_subject',ex:'استفسار',wide:1},{id:'body',l:'f_body',kind:'textarea',ex:'',wide:1}],
   build:function(v){if(!(v.to||'').trim())return '';var p=[];if(v.subject)p.push('subject='+enc(v.subject));if(v.body)p.push('body='+enc(v.body));return 'mailto:'+v.to.trim()+(p.length?'?'+p.join('&'):'')}},
- phone:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567',wide:1}],build:function(v){var d=(v.phone||'').replace(/[\s()\-]/g,'');return d?'tel:'+d:''}},
- sms:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً!',wide:1}],
+ phone:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 109 692 5903',wide:1}],build:function(v){var d=(v.phone||'').replace(/[\s()\-]/g,'');return d?'tel:'+d:''}},
+ sms:{fields:[{id:'phone',l:'f_phone',ltr:1,ex:'+20 109 692 5903',wide:1},{id:'msg',l:'f_msg',kind:'textarea',ex:'أهلاً!',wide:1}],
   build:function(v){var d=(v.phone||'').replace(/[\s()\-]/g,'');return d?'SMSTO:'+d+':'+(v.msg||''):''}},
  location:{fields:[{id:'lat',l:'f_lat',ltr:1,ex:'30.0444'},{id:'lng',l:'f_lng',ltr:1,ex:'31.2357'}],
   build:function(v){var a=parseFloat(v.lat),b=parseFloat(v.lng);if(!isFinite(a)||!isFinite(b)||Math.abs(a)>90||Math.abs(b)>180)return '';return 'geo:'+a+','+b}},
-contact:{fields:[{id:'first',l:'f_first',ex:'أحمد'},{id:'last',l:'f_last',ex:'علي'},{id:'org',l:'f_org',ex:''},{id:'title',l:'f_title',ex:''},{id:'phone',l:'f_phone',ltr:1,ex:'+20 100 123 4567'},{id:'email',l:'f_email',ltr:1,ex:'ahmed@example.com'},{id:'site',l:'f_site',ltr:1,ex:'',wide:1},{id:'addr',l:'f_addr',ex:'',wide:1}],
+contact:{fields:[{id:'first',l:'f_first',ex:'أحمد'},{id:'last',l:'f_last',ex:'علي'},{id:'org',l:'f_org',ex:''},{id:'title',l:'f_title',ex:''},{id:'phone',l:'f_phone',ltr:1,ex:'+20 109 692 5903'},{id:'email',l:'f_email',ltr:1,ex:'ahmed@example.com'},{id:'site',l:'f_site',ltr:1,ex:'',wide:1},{id:'addr',l:'f_addr',ex:'',wide:1}],
   build:function(v){if(!(v.first||v.last||v.phone||v.email))return '';var L=['BEGIN:VCARD','VERSION:3.0','N:'+vc(v.last)+';'+vc(v.first)+';;;','FN:'+vc((v.first||'')+' '+(v.last||'')).trim()];
     if(v.org)L.push('ORG:'+vc(v.org));if(v.title)L.push('TITLE:'+vc(v.title));if(v.phone)L.push('TEL;TYPE=CELL:'+v.phone.replace(/[\s()\-]/g,''));if(v.email)L.push('EMAIL:'+vc(v.email));if(v.site)L.push('URL:'+normUrl(v.site));if(v.addr)L.push('ADR;TYPE=WORK:;;'+vc(v.addr)+';;;;');L.push('END:VCARD');return L.join('\n')}},
  file:{fields:[{id:'url',l:'f_fileurl',ltr:1,ex:'https://example.com/menu.pdf',wide:1}],build:function(v){return normUrl(v.url)}}
@@ -788,11 +820,17 @@ var DEF={dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#101b2e',
 var design=Object.assign({},DEF);
 var PRESETS=[
  {id:'classic',d:{dots:'square',frame:'square',ball:'square',fill:'solid',fg:'#000000',bg:'#ffffff',eyeCustom:false}},
- {id:'ink',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#101b2e',bg:'#ffffff',eyeCustom:true,eyeFrameColor:'#d6195e',eyeBallColor:'#101b2e'}},
-{id:'sunset',d:{dots:'rounded',frame:'rounded',ball:'circle',fill:'linear',fg:'#d6195e',fg2:'#f07a12',angle:45,bg:'#ffffff',eyeCustom:false}},
- {id:'ocean',d:{dots:'dots',frame:'circle',ball:'circle',fill:'linear',fg:'#0b3c8c',fg2:'#0e9aa7',angle:90,bg:'#ffffff',eyeCustom:false}},
- {id:'forest',d:{dots:'smooth',frame:'leaf',ball:'leaf',fill:'solid',fg:'#14532d',bg:'#f4f8ee',eyeCustom:true,eyeFrameColor:'#14532d',eyeBallColor:'#4d7c0f'}},
- {id:'violet',d:{dots:'diamond',frame:'rounded',ball:'diamond',fill:'radial',fg:'#4c1d95',fg2:'#c026d3',bg:'#ffffff',eyeCustom:false}}
+ {id:'ink',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#101b2e',bg:'#ffffff',eyeCustom:true,eyeFrameColor:'#c4124f',eyeBallColor:'#101b2e'}},
+ {id:'navy',d:{dots:'rounded',frame:'rounded',ball:'rounded',fill:'solid',fg:'#0b2e6b',bg:'#ffffff',eyeCustom:false}},
+ {id:'crimson',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'solid',fg:'#8b0f2e',bg:'#ffffff',eyeCustom:false}},
+ {id:'emerald',d:{dots:'rounded',frame:'rounded',ball:'rounded',fill:'solid',fg:'#065f46',bg:'#ffffff',eyeCustom:false}},
+ {id:'plum',d:{dots:'smooth',frame:'circle',ball:'circle',fill:'solid',fg:'#4a1560',bg:'#ffffff',eyeCustom:false}},
+ {id:'cocoa',d:{dots:'square',frame:'square',ball:'square',fill:'solid',fg:'#4a2c12',bg:'#ffffff',eyeCustom:false}},
+ {id:'midnight',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'linear',fg:'#101b2e',bg:'#ffffff',eyeCustom:false,fg2:'#1e40af',angle:45}},
+ {id:'wine',d:{dots:'smooth',frame:'rounded',ball:'rounded',fill:'linear',fg:'#5b0f1f',bg:'#ffffff',eyeCustom:false,fg2:'#9f1239',angle:90}},
+ {id:'slate',d:{dots:'square',frame:'square',ball:'square',fill:'solid',fg:'#1f2937',bg:'#f1f5f9',eyeCustom:false}},
+ {id:'mint',d:{dots:'rounded',frame:'rounded',ball:'rounded',fill:'solid',fg:'#064e3b',bg:'#ecfdf5',eyeCustom:false}},
+ {id:'sand',d:{dots:'square',frame:'rounded',ball:'rounded',fill:'solid',fg:'#3b2a14',bg:'#fdf6e3',eyeCustom:false}}
 ];
 
 /* ---------- SVG builder ---------- */
@@ -897,9 +935,11 @@ function buildDesign(){
   ['style','colors','logo','adv'].forEach(function(k){$('#tab-'+k).replaceChildren()});
   var tiny=QRCore.encode('ETO','L');
   var pre=h('div',{class:'presets'});
-  PRESETS.forEach(function(p){pre.append(h('button',{type:'button',class:'preset',onclick:function(){Object.assign(design,p.d);syncAll();schedule()}},h('span',{class:'th',html:thumbSVG(p,tiny)}),h('span',{},t('p_'+p.id))))});
+  var more=false,mb=h('button',{type:'button',class:'btn sm',onclick:function(){more=!more;ap()}});
+  function ap(){pre.querySelectorAll('.preset.x').forEach(function(b){b.hidden=!more});mb.textContent=t(more?'showLess':'showMore')}
+  PRESETS.forEach(function(p,i){pre.append(h('button',{type:'button',class:'preset'+(i>=4?' x':''),onclick:function(){Object.assign(design,Object.assign({eyeCustom:false},p.d));syncAll();schedule()}},h('span',{class:'th',html:thumbSVG(p,tiny)}),h('span',{},t('p_'+p.id))))});ap();
   $('#tab-style').append(
-    grp('presets',pre),  grp('dots',opts('dots',[['square','d_square'],['smooth','d_smooth'],['rounded','d_rounded'],['dots','d_dots'],['diamond','d_diamond']],dotIcon)),
+    grp('presets',pre,mb),  grp('dots',opts('dots',[['square','d_square'],['smooth','d_smooth'],['rounded','d_rounded'],['dots','d_dots'],['diamond','d_diamond']],dotIcon)),
 grp('frame',opts('frame',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf']],frameIcon)), grp('ball',opts('ball',[['square','d_square'],['rounded','d_rounded'],['circle','d_circle'],['leaf','d_leaf'],['diamond','d_diamond']],ballIcon)));
   var lin=when(h('div',{class:'sub'},colorRow('fg2','fg2'),when(slider('angle',0,360,5,'angle',function(v){return v+'°'}),function(){return design.fill==='linear'})),function(){return design.fill!=='solid'});
   var eyeSub=when(h('div',{class:'sub'},colorRow('eyeFrameColor','eyeFrameColor'),colorRow('eyeBallColor','eyeBallColor')),function(){return design.eyeCustom});
@@ -953,7 +993,7 @@ function lum(hex){var c=[1,3,5].map(function(i){return parseInt(hex.substr(i,2),
 function ratio(a,b){var A=lum(a),B=lum(b);return (Math.max(A,B)+.05)/(Math.min(A,B)+.05)}
 var RECOV={L:7,M:15,Q:25,H:30};
 function setStatus(kind,msg){var s=$('#status');s.className='status'+(kind==='ok'?'':' '+kind);s.querySelector('span').textContent=msg}
-function update(){updateCore();updateRail()}
+function update(){updateCore();updateRail();saveState()}
 function updateCore(){
   var tp=state.type,text=TYPES[tp].build(values[tp]),qr=null,err='';
   if(!text)err='empty';
@@ -962,7 +1002,7 @@ function updateCore(){
   var sheet=$('#sheet'),box=$('#qrbox');
   sheet.classList.toggle('transp',!!design.transparent&&!!qr);
   var dis=!qr;
-  document.querySelectorAll('#dl .btn,#copySvg').forEach(function(b){b.disabled=dis});
+  document.querySelectorAll('#dl .btn,#copySvg,#xtra .btn').forEach(function(b){b.disabled=dis});
   if(!qr){
     box.innerHTML='';
     box.append(h('div',{class:'empty'+(err==='empty'?'':' bad')},err==='long'?t('tooLong',{n:QRCore.maxBytes(design.ecc),e:design.ecc}):err==='empty'?t('empty'):t('empty')));
@@ -1014,7 +1054,7 @@ function buildExport(){
   [512,1024,2048,4096].forEach(function(v){sz.append(h('button',{type:'button','aria-pressed':String(state.size===v),onclick:function(){state.size=v;buildExport()}},String(v)))});
   var dl=$('#dl');dl.replaceChildren();
   [['png','PNG'],['svg','SVG'],['jpg','JPG'],['webp','WebP']].forEach(function(p,i){dl.append(h('button',{type:'button',class:'btn'+(i===0?' pri':''),onclick:function(){exportAs(p[0])}},p[1]))});
-  $('#szLabel').textContent=t('stSize');$('#copySvg').textContent=t('copySvg');
+  $('#szLabel').textContent=t('stSize');extraExport();$('#copySvg').textContent=t('copySvg');
   dl.querySelectorAll('.btn').forEach(function(b){b.disabled=!state.current})}
 state.tab='content';state.view='home';state.fromLink=false;
 var ICONS={content:'<path d="M4 6h16M4 12h10M4 18h14"/>',style:'<rect x="3.5" y="3.5" width="8" height="8" rx="1.5"/><circle cx="17" cy="7.5" r="4"/><path d="M3.5 20.5l4-7 4 7z"/><rect x="14" y="14" width="6.5" height="6.5" rx="3.25"/>',colors:'<circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10.5" r="1.1" fill="currentColor"/><circle cx="12" cy="7.8" r="1.1" fill="currentColor"/><circle cx="15.6" cy="10.5" r="1.1" fill="currentColor"/><path d="M12 20.5c-1.6 0-1.6-2.3 0-3 1.2-.5 3.5.2 3.5-1.5"/>',logo:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/>',adv:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/>'};
@@ -1118,7 +1158,7 @@ function setMode(m){
   $('#cam').hidden=m!=='cam';$('#drop').hidden=m!=='img';
   if(m!=='cam')stopCam();scanStatus(null)}
 function prepScan(){
-  $('#result').replaceChildren();scan.last=null;scanStatus(null);setMode(scan.mode);detInit()}
+  $('#result').replaceChildren();scan.last=null;scanStatus(null);setMode(scan.mode);detInit();renderHist()}
 
 function stopCam(){
   clearTimeout(cam.timer);cam.busy=false;cam.torch=false;
@@ -1185,7 +1225,7 @@ async function scanFile(file){
 
 function onResult(txt,meta){
   stopCam();try{if(navigator.vibrate)navigator.vibrate(60)}catch(e){}
-  scanStatus(null);renderResult(txt,meta)}
+  scanStatus(null);histAdd(txt);renderResult(txt,meta)}
 
 /* ---------- result classification + cards ---------- */
 function parseWifi(str){
@@ -1278,6 +1318,51 @@ function initScan(){
   $('#chScan').addEventListener('click',function(e){e.preventDefault();go('scan')});
   document.addEventListener('visibilitychange',function(){if(document.hidden)stopCam()});
 }
+/* ---------- extras: share/print, autosave, history, install ---------- */
+async function curPng(){var cur=state.current;if(!cur)return null;var svg=buildSVG(cur.qr,design,1024,'ex'),m=svg.match(/ width="(\d+)" height="(\d+)"/);return rasterize(svg,+m[1],+m[2],'image/png',design.transparent?'#ffffff':design.bg)}
+function extraExport(){
+  var b=$('#xtra');if(!b){b=h('div',{id:'xtra',class:'dl x3'});$('#copySvg').after(b)}
+  b.replaceChildren(h('button',{type:'button',class:'btn',onclick:async function(){try{await navigator.clipboard.write([new ClipboardItem({'image/png':await curPng()})]);toast(t('copiedOk'))}catch(e){toast(t('copyFail'))}}},t('copyImg')),
+   h('button',{type:'button',class:'btn',onclick:async function(){try{var bl=await curPng(),fl=new File([bl],'eto-qr.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[fl]}))await navigator.share({files:[fl]});else await saveFile('eto-qr.png',bl)}catch(e){}}},t('shareImg')),
+   h('button',{type:'button',class:'btn',onclick:async function(){try{var u=URL.createObjectURL(await curPng()),w=window.open('','_blank');if(!w){toast(t('copyFail'));return}w.document.write('<title>Eto QrCode</title><body style="margin:0;display:grid;place-items:center;height:100vh"><img src="'+u+'" style="width:70vmin" onload="print()">');w.document.close()}catch(e){}}},t('printQR')));
+  b.querySelectorAll('.btn').forEach(function(x){x.disabled=!state.current})}
+var svT=0;
+function saveState(){clearTimeout(svT);svT=setTimeout(function(){try{var v={};ORDER.forEach(function(k){v[k]=values[k]});localStorage.setItem('eto-state',JSON.stringify({type:state.type,design:design,values:v}))}catch(e){}},500)}
+function loadState(){try{var o=JSON.parse(localStorage.getItem('eto-state')||'null');if(!o)return;
+  if(o.design)Object.keys(DEF).forEach(function(k){if(o.design[k]!==undefined)design[k]=o.design[k]});
+  if(o.type&&TYPES[o.type])state.type=o.type;
+  if(o.values)ORDER.forEach(function(k){if(o.values[k]){Object.keys(values[k]).forEach(function(f){if(o.values[k][f]!==undefined)values[k][f]=o.values[k][f]});touched[k]=1}})}catch(e){}}
+function histGet(){try{return JSON.parse(localStorage.getItem('eto-hist')||'[]')}catch(e){return[]}}
+function histAdd(txt){var a=histGet().filter(function(x){return x.txt!==txt});a.unshift({txt:txt,k:classify(txt).k});try{localStorage.setItem('eto-hist',JSON.stringify(a.slice(0,15)))}catch(e){}}
+function renderHist(){
+  var hs=$('#hist');if(!hs)return;hs.replaceChildren();var a=histGet();if(!a.length)return;
+  hs.append(h('h3',{},t('histTitle')),a.map(function(x){return h('button',{type:'button',class:'hi',onclick:function(){renderResult(x.txt,{})}},h('b',{},t('rk_'+(x.k==='text'?'link':x.k))),h('span',{dir:'auto'},short(x.txt,70)))}),
+    h('button',{type:'button',class:'btn sm',onclick:function(){try{localStorage.removeItem('eto-hist')}catch(e){}renderHist()}},t('histClear')))}
+var dfp=null,PRE=['./','icon.png','icon-192.png','icon-512.png','manifest.webmanifest'],EXT=['https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js'];
+function standalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true}
+function setProg(n,msg){var b=$('#pbar i');if(b)b.style.width=n+'%';$('#pnum').textContent=Math.round(n)+'%';if(msg)$('#pmsg').textContent=msg}
+async function precache(){
+  if(!window.caches)return;var c=await caches.open('eto-v1'),all=PRE.concat(EXT),n=0;
+  for(var i=0;i<all.length;i++){try{var r=await fetch(all[i],EXT.indexOf(all[i])>-1?{mode:'no-cors'}:{cache:'reload'});await c.put(all[i],r)}catch(e){}n++;setProg(n/all.length*100)}}
+async function dlFile(){
+  setProg(0,t('instDl'));
+  try{var r=await fetch(location.href.split('#')[0]),len=+r.headers.get('content-length')||0,rd=r.body.getReader(),ch=[],got=0;
+    for(;;){var x=await rd.read();if(x.done)break;ch.push(x.value);got+=x.value.length;if(len)setProg(Math.min(99,got/len*100))}
+    setProg(100,t('instDone'));await saveFile('eto-qrcode.html',new Blob(ch,{type:'text/html'}))}catch(e){toast(t('saveFail'))}}
+async function doInstall(){
+  $('#ovl').hidden=false;$('#pextra').hidden=true;setProg(0,t('instPrep'));
+  try{await precache()}catch(e){}
+  if(dfp){setProg(100,t('instAsk'));try{dfp.prompt();var ch=await dfp.userChoice;dfp=null;if(ch.outcome==='accepted'){setProg(100,t('instDone'));return}}catch(e){}}
+  $('#pextra').hidden=false;$('#pios').hidden=!/iphone|ipad|ipod|macintosh/i.test(navigator.userAgent)||!('ontouchend' in document);setProg(100,t('instDone'))}
+function initInstall(){
+  if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(function(){});
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dfp=e});
+  window.addEventListener('appinstalled',function(){dfp=null;toast(t('installed'));$('#inst').hidden=true});
+  $('#homeView').append(h('div',{class:'inst',id:'inst',hidden:standalone()},h('div',{},h('b',{'data-t':'instTitle'}),h('span',{'data-t':'instSub'})),h('button',{type:'button',class:'btn pri',onclick:doInstall,'data-t':'instBtn'})));
+  document.body.append(h('div',{class:'ovl',id:'ovl',hidden:true},h('div',{class:'dlg'},h('h3',{'data-t':'instTitle'}),h('p',{id:'pmsg'}),h('div',{class:'pbar',id:'pbar'},h('i')),h('div',{class:'pnum',id:'pnum'},'0%'),
+    h('div',{id:'pextra',hidden:true,style:'display:flex;flex-direction:column;gap:10px'},h('p',{id:'pios','data-t':'instIOS'}),h('p',{'data-t':'instManual'}),h('button',{type:'button',class:'btn',onclick:dlFile,'data-t':'instFile'})),
+    h('button',{type:'button',class:'btn',onclick:function(){$('#ovl').hidden=true},'data-t':'instClose'}))));
+  $('#result').after(h('div',{class:'hist',id:'hist'}))}
 function i18nStatic(){document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.getAttribute('data-t'))})}
 
 var FAQ={
@@ -1288,7 +1373,7 @@ var FAQ={
   ['أطبعه بحجم قد إيه؟','قاعدة تقريبية: عرض الكود يكون حوالي عُشر المسافة اللي هيتمسح منها. يعني كود على مكتب ممكن يبقى 2 سم، وبوستر يتمسح من 3 متر محتاج حوالي 30 سم.'],
   ['ممكن أغيّر اللينك بعد الطباعة؟','لأ. الكود ثابت، يعني المحتوى مكتوب جواه ومبينتهيش. لو محتاج تغيّر الوجهة بعدين، خلّي الكود يشاور على صفحة إنت بتتحكم فيها وغيّر وجهتها من هناك.'],
   ['بياناتي بتتبعت لأي مكان؟','لأ. الكود بيتعمل جوّه متصفحك والصور بتتحفظ على جهازك، ومفيش حاجة بتروح لأي سيرفر.'],
-  ['إزاي أكتب رقم واتساب صح؟','اكتب الرقم بكود الدولة من غير صفر ولا علامة +. مثال: الرقم المصري 01001234567 يتكتب 201001234567.'],
+  ['إزاي أكتب رقم واتساب صح؟','اكتب الرقم بكود الدولة من غير صفر ولا علامة +. مثال: الرقم المصري 01096925903 يتكتب 201096925903.'],
   ['الشعار بوّظ الكود؟','خلّي حجم الشعار من 15% لـ 25%، واختار تصحيح أخطاء H، وجرّب الكود بموبايلك. لو الخلفية بتاعة الشعار معقدة، سيب خيار مساحة بلون الخلفية شغّال.']
  ],
  en:[
@@ -1298,12 +1383,12 @@ var FAQ={
   ['How big should I print it?','A rough rule: the code width should be about one tenth of the scanning distance. A desk code can be 2 cm, a poster scanned from 3 meters needs about 30 cm.'],
   ['Can I change the link after printing?','No. The code is static: the content is written into it and it never expires. If you may need to change the destination later, point the code to a page you control and change that page.'],
   ['Is my data sent anywhere?','No. Codes are generated inside your browser and images are saved on your device. Nothing goes to a server.'],
-  ['How do I write a WhatsApp number?','Use the country code with no leading zero and no + sign. Example: the Egyptian number 01001234567 becomes 201001234567.'],
+  ['How do I write a WhatsApp number?','Use the country code with no leading zero and no + sign. Example: the Egyptian number 01096925903 becomes 201096925903.'],
   ['Did my logo break the code?','Keep the logo between 15% and 25%, choose error correction H, and test with your phone. If the logo has a busy background, leave the background pad option on.']
  ]};
 var STEPS={ar:['اختار نوع المحتوى واكتب بياناته.','غيّر الشكل والألوان من الأزرار الجانبية.','اختار المقاس والصيغة ونزّل الكود.'],en:['Choose the content type and fill in the details.','Change the shapes and colors from the side buttons.','Pick a size and format, then download.']};
-FAQ.ar.push(['إزاي أمسح كود؟','من الصفحة الرئيسية اختار "امسح كود QR". افتح الكاميرا ووجّهها على الكود، أو ارفع صورة فيها كود (لقطة شاشة أو صورة من المعرض)، أو الصقها بـ Ctrl+V. الكود بيتقري على جهازك وبنعرضلك المحتوى.'],['الكاميرا مش بتفتح؟','لازم تدّي المتصفح إذن الكاميرا، والموقع لازم يكون على رابط https (GitHub Pages بيشتغل بيه). لو رفضت الإذن قبل كده، غيّره من إعدادات الموقع في المتصفح. ولو مفيش كاميرا استخدم "صورة".'],['إزاي النص يظهر في صفحة حلوة؟','في تاب المحتوى اختار "نص" وسيب خيار "اعرض النص في صفحة" شغال. الكود هيشيل لينك لموقعك فيه النص، وأي حد يمسحه بكاميرا موبايله هيتفتح له النص في نص صفحة مرتبة. لازم الموقع يكون منشور على الإنترنت.']);
-FAQ.en.push(['How do I scan a code?','From the home page choose "Scan a QR code". Open the camera and point it at the code, or upload a picture with a code (a screenshot or a gallery photo), or paste it with Ctrl+V. The code is read on your device and we show the content.'],['The camera does not open?','You must allow camera access, and the site must be on an https link (GitHub Pages is). If you denied access before, change it in the browser site settings. With no camera, use "Image".'],['How does text show on a clean page?','In the Content tab choose "Text" and keep "Show the text on a clean page" on. The code holds a link to your site with the text inside, and anyone who scans it with their phone camera sees the text centered on a tidy page. The site must be published online.']);
+FAQ.ar.push(['إزاي أمسح كود؟','من الصفحة الرئيسية اختار "امسح كود QR". شغّل الكاميرا ووجّهها على الكود، أو ارفع صورة فيها كود (لقطة شاشة أو صورة من المعرض) أو الصقها بـ Ctrl+V. الكود بيتقري على جهازك وبنعرضلك اللي جواه مرتب.'],['الكاميرا مش بتفتح؟','لازم تدّي المتصفح إذن الكاميرا. لو رفضته قبل كده، افتح إعدادات الموقع في المتصفح وفعّله. وعلى الكمبيوتر اتأكد إن مفيش برنامج تاني فاتح الكاميرا. ولو مفيش كاميرا، استخدم "صورة".'],['إزاي النص يظهر في صفحة حلوة؟','في تاب المحتوى اختار "نص" وسيب خيار "اعرض النص في صفحة" شغال. أي حد يمسح الكود بكاميرا موبايله هيشوف النص في نص صفحة مرتبة من غير ما ينزّل أي برنامج.'],['إزاي أنزّل الموقع كتطبيق؟','من الصفحة الرئيسية اضغط "نزّل التطبيق" وهتشوف شريط التحميل جوه الموقع. على الآيفون: اضغط زر المشاركة واختار "إضافة إلى الشاشة الرئيسية". بعدها بيفتح زي أي برنامج وبيشتغل حتى من غير نت.'],['الأكواد اللي عملتها بتتحفظ؟','تصميمك وآخر محتوى كتبته بيتحفظوا على جهازك لوحدهم، وكمان آخر الأكواد اللي مسحتها. تقدر تمسح السجل في أي وقت من صفحة المسح.']);
+FAQ.en.push(['How do I scan a code?','From the home page choose "Scan a QR code". Start the camera and point it at the code, or upload a picture (a screenshot or gallery photo), or paste it with Ctrl+V. It is read on your device and shown neatly.'],['The camera does not open?','Allow camera access for this site. If you denied it before, turn it on in the browser site settings, and close any other app using the camera. With no camera, use "Image".'],['How does text show on a clean page?','In the Content tab choose "Text" and keep "Show the text on a clean page" on. Anyone who scans the code with a phone camera sees the text centered on a tidy page, with no app needed.'],['How do I install it as an app?','On the home page tap "Install the app" and watch the progress bar. On iPhone tap Share and choose "Add to Home Screen". It then opens like any app and works offline.'],['Is my work saved?','Your design and last content are saved on your device automatically, along with recent scans. You can clear the history any time from the scan page.']);
 function copyText(txt,okMsg){var p;try{p=navigator.clipboard.writeText(txt)}catch(e){p=Promise.reject(e)}p.then(function(){toast(okMsg)},function(){toast(t('copyFail'))})}
 function buildHelp(){
   $('#helpBack').textContent=t('helpBack');
@@ -1328,7 +1413,7 @@ function applyLang(){
   $('#tagline').textContent=t('tagline');$('#privacy').textContent=t('foot');$('#copyTxt').replaceChildren(h('bdi',{},'© '+new Date().getFullYear()+' Eto QrCode'),' — '+t('copy'));$('#helpBtnTxt').textContent=t('help');$('#tip').textContent=t('tip');
   $('#langBtn').textContent=lang==='ar'?'English':'العربية';
   if(!design.captionText||design.captionText===S.captionDefault.ar||design.captionText===S.captionDefault.en)design.captionText=t('captionDefault');
-  i18nStatic();buildTypes();buildForm();buildDesign();buildExport();buildRail();buildHelp();showView(state.view,{fromLink:state.fromLink});refreshDyn();update();
+  i18nStatic();buildTypes();buildForm();buildDesign();buildExport();buildRail();buildHelp();showView(state.view,{fromLink:state.fromLink});refreshDyn();renderHist();update();
   try{localStorage.setItem('eto-lang',lang)}catch(e){}}
 function init(){
   try{var l=localStorage.getItem('eto-lang');if(l==='en'||l==='ar')lang=l}catch(e){}
@@ -1342,7 +1427,9 @@ function init(){
   $('#helpBtn').addEventListener('click',function(){go('help')});
   $('#helpBack').addEventListener('click',function(){go('home')});
   $('#brandLink').addEventListener('click',function(e){e.preventDefault();go('home')});
+  loadState();
   initScan();
+  initInstall();
   applyLang();
   route();
   window.addEventListener('hashchange',route);
