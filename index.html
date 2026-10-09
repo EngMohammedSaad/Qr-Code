@@ -410,7 +410,6 @@ details.q .a p{margin:0 0 6px}
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
-/* QR Code encoder (byte mode, versions 1-40, ECC L/M/Q/H). No dependencies. */
 const QRCore = (function () {
   'use strict';
   var FMT_BITS = { L: 1, M: 0, Q: 3, H: 2 };
@@ -790,15 +789,13 @@ Object.assign(S,{
 });
 
 function t(k,vars){var s=(S[k]||{})[lang]||k;if(vars)Object.keys(vars).forEach(function(n){s=s.split('{'+n+'}').join(vars[n])});return s}
-
-/* ---------- content types ---------- */
 function normUrl(v){v=(v||'').trim();if(!v)return '';return /^[a-z][a-z0-9+.\-]*:/i.test(v)?v:'https://'+v}
 function esc(s){return String(s).replace(/([\;,:"])/g,'\\$1')}
 function vc(s){return String(s||'').replace(/([,;\\])/g,'\\$1').replace(/\r?\n/g,'\\n')}
 function enc(s){return encodeURIComponent(s)}
 var TYPES={
  link:{fields:[{id:'url',l:'f_url',ltr:1,ex:'https://example.com/eto',wide:1}],build:function(v){return normUrl(v.url)}},
- text:{fields:[{id:'text',l:'f_text',kind:'textarea',ex:'أهلاً من Eto QrCode',wide:1},{id:'page',l:'f_page',kind:'checkbox',ex:true},{id:'site',l:'f_site2',ltr:1,ex:'',ph:'https://yourname.github.io/eto-qrcode/',wide:1,dep:'page'}],
+ text:{fields:[{id:'text',l:'f_text',kind:'textarea',ex:'أهلاً من Eto QrCode',wide:1},{id:'page',l:'f_page',kind:'checkbox',ex:true},{id:'site',l:'f_site2',ltr:1,ex:'',ph:'https://engmohammedsaad.github.io/Qr-Code/',wide:1,dep:'page'}],
   build:function(v){if(!v.text)return '';return v.page?viewerUrl(v.text):v.text}},
  wifi:{fields:[{id:'ssid',l:'f_ssid',ex:'Eto-WiFi'},{id:'pass',l:'f_pass',ltr:1,ex:'change-me-123'},{id:'enc',l:'f_enc',kind:'select',opts:[['WPA','WPA / WPA2 / WPA3'],['WEP','WEP'],['nopass','enc_nopass']],ex:'WPA'},{id:'hidden',l:'f_hidden',kind:'checkbox',ex:false}],
   build:function(v){if(!v.ssid)return '';return 'WIFI:T:'+v.enc+';S:'+esc(v.ssid)+';'+(v.enc!=='nopass'&&v.pass?'P:'+esc(v.pass)+';':'')+(v.hidden?'H:true;':'')+';'}},
