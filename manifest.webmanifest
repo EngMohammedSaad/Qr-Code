@@ -1,7 +1,7 @@
 {
   "name": "Eto QrCode",
   "short_name": "Eto QR",
-  "description": "اعمل كود QR أو امسحه",
+  "description": "Eto QrCode: make a styled QR code for any link, text, Wi-Fi, WhatsApp, contact or file link. Download PNG, SVG, JPG or WebP",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
