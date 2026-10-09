@@ -650,8 +650,6 @@ function h(tag,a){var e=document.createElement(tag),k=[].slice.call(arguments,2)
   (function add(list){list.forEach(function(c){if(c==null||c===false)return;if(Array.isArray(c))return add(c);e.append(c.nodeType?c:document.createTextNode(c));});})(k);
   return e;}
 function f(n){return +n.toFixed(3)}
-
-/* ---------- i18n ---------- */
 var lang='ar';
 var S={
  tab_content:{ar:'المحتوى',en:'Content'},tab_style:{ar:'الأشكال',en:'Shapes'},tab_colors:{ar:'الألوان',en:'Colors'},tab_logo:{ar:'الشعار والنص',en:'Logo & text'},tab_adv:{ar:'متقدم',en:'Advanced'},tab_help:{ar:'مركز المساعدة',en:'Help Center'},
@@ -711,7 +709,7 @@ var S={
 };
 Object.assign(S,{
  tagline:{ar:'اعمل كيو آر كود أو امسحه: رابط، نص، واي فاي، واتساب، ملف. صمّمه بشكلك ونزّله صورة أو SVG.',en:'Make or scan a QR code: a link, text, Wi-Fi, WhatsApp, a file. Style it and save it as an image or SVG.'},
- foot:{ar:'الكود بيتعمل ويتقري جوّه متصفحك، ومفيش حاجة بتتبعت لأي سيرفر.',en:'Codes are made and read inside your browser. Nothing is sent to any server.'},
+ foot:{ar:'صل ع النبي.',en:'Codes are made and read inside your browser. Nothing is sent to any server.'},
  helpBack:{ar:'رجوع للرئيسية',en:'Back to home'},
  homeBtn:{ar:'الرئيسية',en:'Home'},
  homeTitle:{ar:'اعمل كود QR أو امسحه',en:'Make a QR code, or scan one'},
